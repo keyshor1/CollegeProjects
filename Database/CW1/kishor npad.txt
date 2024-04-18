@@ -1,0 +1,116 @@
+create table staff(staff_id int, 
+staff_Name varchar(30) not null,
+phone int, 
+address varchar(30) not null,
+ age int, 
+salary int not null,
+CONSTRAINT staff_id_PK PRIMARY KEY(staff_id));
+
+create table artist(
+artist_id varchar(20), 
+artist_Name varchar(30) not null, 
+address varchar(30) not null,
+age int, 
+CONSTRAINT artist_id_PK PRIMARY KEY(artist_id));
+
+create table category(customer_type varchar(30), discount int not null,CONSTRAINT customer_type_PK PRIMARY KEY(customer_type));
+
+create table customer(customer_id int, customer_Name varchar(30) not null,phone int, address varchar(30), staff_id int not null, customer_Type varchar(30) not null,CONSTRAINT customer_id_PK PRIMARY KEY(customer_id),CONSTRAINT staff_id__FK FOREIGN KEY(staff_id) REFERENCES 
+staff(staff_id),CONSTRAINT customer_type__FK FOREIGN KEY(customer_type) REFERENCES 
+category(customer_type));
+
+create table painting(painting_id int, painting_Name varchar(30) not null,painting_theme varchar(40) not null,available char(1),paid_price decimal(10,3), book_Date date not null, rental_price decimal(10,3),artist_id varchar(20) not null,CONSTRAINT painting_id_PK PRIMARY KEY(painting_id),CONSTRAINT artist_id__FK FOREIGN KEY(artist_id) REFERENCES 
+artist(artist_id));
+
+create table Hire(customer_id int, painting_id int, hire_Date date, return_Date date,CONSTRAINT customer__FK FOREIGN KEY(customer_id) REFERENCES 
+customer(customer_id),CONSTRAINT painting__FK FOREIGN KEY(painting_id) REFERENCES 
+painting(painting_id),CONSTRAINT lease_id_PK PRIMARY KEY(painting_id,customer_id));
+
+create table buy(customer_id int, painting_id int, painting_Priceco decimal(10,3),CONSTRAINT customer FOREIGN KEY(customer_id) REFERENCES 
+customer(customer_id),CONSTRAINT painting FOREIGN KEY(painting_id) REFERENCES 
+painting(painting_id),CONSTRAINT purchase_id_PK PRIMARY KEY(painting_id,customer_id));
+
+insert all
+into staff values(1001,'Kishor Shrestha',9830378987,'Janakpur',33,13256)
+into staff values(1002,'Nischala Rai',9834251765,'Patan',35,54287)
+into staff values(1003,'Geeta Singh',9813276547,'Boudha',37,65321)
+into staff values(1004,'Kabir Singh',9845763210,'Kathmandu',38,76432)
+into staff  values(1005,'Comret thapa',9876532109,'Kathmandu',39,54329)
+into staff values(1006,'Virat kholi',9865123876,'Patan',41,65387)
+into staff values(1007,’Steve Smith’,9854732098,'Pokhara',44,98754)
+into staff values(1008,’Paras Khadka’,9898654098,'Boudha',46,09876)
+SELECT * FROM DUAL;
+
+insert all 
+into artist values('K01','Irusa','Patan',10)
+into artist values('K02','Ashok','Patan' ,27)
+into artist values('K03','Aayush','Janakpur',66)
+into artist values('K04','Zenith','Pokhara',31)
+into artist values('K05','Hary','Pokhara',22)
+into artist values('K06','Williamson','Patan',29)
+into artist values('K07','Guptil','Ratnapark',25)
+into artist values('K08','Kane','Baneshwor',32)
+into artist values('K09','David','Kathmandu',33)
+into artist values('K10','Raj','Kathmandu',44)
+into artist values('K11','Karan','Palpa',83)
+into artist values('K12','Badal','Janakpur',40)
+SELECT * FROM DUAL;
+
+insert all
+into category values('R',15)
+into category values('L',10)
+into category values('p',5)
+into category values('VIP',0)
+SELECT * FROM DUAL;
+
+insert all
+into customer values (1,'Boult',9865321098,'Ilam',1001,'L')
+into customer  values (2,'Babar',9875098765,'Rara',1002,'VIP')
+into customer  values (3,'Fakar',9823476542,'khotang',1008,'L')
+into customer  values (4,'Azham',9835276187,'bhojpur',1002,'R')
+into customer  values (5,'Shanwaj',9824376890,'Pokhara',1006,'R')
+into customer  values (6,'Amir',9845387623,'Mustang',1003,'p')
+into customer  values (7,'Sami',9834276541,'Jumla',1005,'p')
+into customer  values (8,'Jadega',9856498709,'Humla',1003,'L')
+SELECT * FROM DUAL;
+
+insert all 
+into painting  values(101,'Sachin','Person','y',9995.33,To_Date('2021-12-01', 'YYYY-MM-DD'),2234.33,'K01')
+into painting  values(102,'Monkey','animal','y',7756.33,To_Date('2021-12-02', 'YYYY-MM-DD'),3322.43,'K02')
+into painting  values(103,'Donkey','animal', 'n',6590.44, To_Date('2021-12-05', 'YYYY-MM-DD'),4532.11,'K03')
+into painting  values(104,'Road','landscape','y',9970.01,To_Date('2021-12-14', 'YYYY-MM-DD'),4423.10,'K04')
+into painting  values(105,'Hills','landscape','y',7685.66,To_Date('2021-12-12', 'YYYY-MM-DD'),1276.44,'K05')
+into painting  values(106,'Zebra','animal','y',8675.77,To_Date('2021-12-11', 'YYYY-MM-DD'),2548.44,'K06')
+into painting  values(107,'Snake','animal','n',8799.66,To_Date('2021-12-19', 'YYYY-MM-DD'),4325.22,'K07')
+into painting  values(108,'Thor','Person','y',6788.77,To_Date('2021-12-04', 'YYYY-MM-DD'),4327.44,'K08')
+into painting  values(109,'Garden','landscape','y',9706.77,To_Date('2021-12-29', 'YYYY-MM-DD'),2315.33,'K09')
+into painting  values(110,'Rabit','animal','y',7866.77,To_Date('2021-12-28', 'YYYY-MM-DD'),3421.33,'K10')
+into painting  values(111,'Gayle','Person','y',6786.77,To_Date('2021-12-27', 'YYYY-MM-DD'),3422.33,'K11')
+into painting  values(112,'Butterfly','animal','y',7786.77,To_Date('2021-12-30', 'YYYY-MM-DD'),3421.33,'K12')
+SELECT * FROM DUAL;
+
+insert all
+into  hire values (1,109,To_Date('2021-11-11', 'YYYY-MM-DD'),To_Date('2021-12-11', 'YYYY-MM-DD'))
+into  hire values (4,105,To_Date('2021-11-12', 'YYYY-MM-DD'),To_Date('2021-12-12', 'YYYY-MM-DD'))
+into  hire values (2,111,To_Date('2021-11-13', 'YYYY-MM-DD'),To_Date('2021-12-13', 'YYYY-MM-DD'))
+into  hire values (6,110,To_Date('2021-11-21', 'YYYY-MM-DD'),To_Date('2021-12-21', 'YYYY-MM-DD'))
+into  hire values (3,107,To_Date('2021-11-20', 'YYYY-MM-DD'),To_Date('2021-12-20', 'YYYY-MM-DD'))
+into  hire values (8,109,To_Date('2021-11-23', 'YYYY-MM-DD'),To_Date('2021-12-23', 'YYYY-MM-DD'))
+into  hire values (5,102,To_Date('2021-11-22', 'YYYY-MM-DD'),To_Date('2021-12-22', 'YYYY-MM-DD'))
+into  hire values (4,112,To_Date('2021-11-01', 'YYYY-MM-DD'),To_Date('2022-12-01', 'YYYY-MM-DD'))
+SELECT * FROM DUAL;
+
+
+insert all
+into buy values (1,105,4532.11)
+into buy values (3,112,3251.11)
+into buy values (2,104,2451.11)
+into buy values (4,111,3645.11)
+into buy values (8,105,3427.11)
+into buy values (5,107,4352.11)
+into buy values (2,102,2436.11)
+into buy values (6,108,4532.11)
+into buy values (2,105,2435.11)
+into buy values (7,109,2324.11)
+SELECT * FROM DUAL;
+

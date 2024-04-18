@@ -1,0 +1,31 @@
+﻿main {
+    display: block;
+    position: relative;
+}
+
+    main > h3 {
+        align-items: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: grey;
+    }
+
+        main > h3:hover {
+            margin-left: 2rem;
+            color: black;
+            font-size: 3.2rem;
+        }
+
+        p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-80%, -50%);
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: grey;
+        }
+
+        p:hover{
+            color:black;
+        }

@@ -1,0 +1,3 @@
+Avenger,Tony Starc,38,$1.5
+Tesla,elon musk,32,$1
+Amazon,jeff bezos,22,$2
